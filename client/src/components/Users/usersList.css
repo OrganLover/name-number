@@ -1,0 +1,118 @@
+.usersList {
+  list-style: none;
+  font-size: 24px;
+  color: #333;
+  background-color: #5c62ec;
+  border-radius: 10px;
+  width: 50%;
+  height: fit-content;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.usersListItem {
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.buttonsBlock {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100px;
+}
+
+.editButton,
+.deleteButton {
+  border: 2px solid #333;
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.usersListItem span {
+  display: block;
+}
+
+.usersControlPanel {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 5px;
+  position: relative;
+}
+
+.plusButton {
+  border-radius: 100%;
+  cursor: pointer;
+  color: white;
+}
+
+.modalInputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalInputs input {
+  display: block;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin: 5px;
+}
+.modalButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.modalButtons button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 0;
+  width: 75px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.modalAddButton {
+  background-color: #0066ff;
+  color: white;
+}
+
+.modalCancelButton {
+  background-color: grey;
+  color: white;
+}
+
+.modalConfirmButton {
+  background-color: #ff3333;
+  color: white;
+}
+
+.modalTitle {
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.deleteAllButton {
+  position: absolute;
+  right: 25px;
+  bottom: 5px;
+  cursor: pointer;
+  color: #333;
+}
