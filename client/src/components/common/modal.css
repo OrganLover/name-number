@@ -12,8 +12,10 @@
 }
 
 .modalContent {
-  width: 550px;
-  height: 400px;
+  width: 80%;
+  max-width: 500px;
+  height: 50%;
+  max-height: 300px;
   background-color: white;
   border-radius: 10px;
   position: relative;
