@@ -21,7 +21,6 @@ class UserContoller {
   }
   async deleteUser(req, res) {
     const userId = req.params.userId
-    console.log(userId)
     const deletedUser = await db.query(`DELETE FROM name_and_num WHERE id = $1`, [userId])
     res.json(deletedUser.rows[0])
   }
