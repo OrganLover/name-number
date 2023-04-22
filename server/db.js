@@ -1,12 +1,33 @@
 const Pool = require('pg').Pool
-require('dotenv').config()
 
 const pool = new Pool({
-  user: process.env.POSTGRES_USERNAME,
-  password: process.env.POSTGRES_PASSWORD,
-  host: process.env.POSTGRES_HOST,
+  user: '', // postgres user name
+  password: '', // postgres user password
+  host: 'localhost',
   port: 5432,
-  database: process.env.POSTGRES_DB_NAME
+  database: 'name_num_db'
 })
 
 module.exports = pool
+
+
+
+// 1 команда:
+
+// create DATABASE name_num_db;
+
+
+
+// 2 команда:
+
+// \connect name_num_db;
+
+
+
+// 3 команда:
+
+// create TABLE name_and_num(
+//   id SERIAL PRIMARY KEY,
+//   user_name VARCHAR(255),
+//   user_number VARCHAR(255)
+// );
