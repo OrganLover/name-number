@@ -1,18 +1,33 @@
 import {useState, useEffect} from 'react'
-import UsersList from './UsersList'
+import {UsersList} from './UsersList'
+
+export interface IUser {
+  id: number | null
+  user_name: string | null
+  user_number: string | null
+}
+
+export interface IModal {
+  isOpened: boolean
+  mode: string
+}
 
 function UsersListContainer() {
-  const [users, setUsers] = useState([])
-  const [modal, setModal] = useState({isOpened: false, mode: ''})
-  const [name, setName] = useState('')
-  const [number, setNumber] = useState('')
-  const [user, setUser] = useState({})
+  const [users, setUsers] = useState<Array<IUser>>([])
+  const [modal, setModal] = useState<IModal>({isOpened: false, mode: ''})
+  const [name, setName] = useState<string | null>(null)
+  const [number, setNumber] = useState<string | null>(null)
+  const [user, setUser] = useState<IUser | null>(null)
 
   useEffect(() => {
     fetch('/api/users')
       .then((response) => response.json())
-      .then((data) => setUsers(data.sort((a, b) => b.id - a.id)))
-  }, [users.length])
+      .then((data) => {
+        if (data.toString() !== users.toString()) {
+          setUsers(data.sort((a: IUser, b: IUser) => b.id! - a.id!))
+        }
+      })
+  }, [users.length, users])
 
   const onAddClick = () => {
     fetch('/api/users', {
@@ -26,7 +41,7 @@ function UsersListContainer() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => setUsers([...users, data]))
+      .then((data) => setUsers([...users, data].sort((a: IUser, b: IUser) => b.id! - a.id!)))
     setName('')
     setNumber('')
     setModal({isOpened: false, mode: ''})
@@ -38,7 +53,7 @@ function UsersListContainer() {
     setModal({isOpened: false, mode: ''})
   }
 
-  const onEditClick = (user) => {
+  const onEditClick = (user: IUser) => {
     setUser(user)
     setName(user.user_name)
     setNumber(user.user_number)
@@ -54,38 +69,37 @@ function UsersListContainer() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: user.id,
+          id: user?.id,
           name: name,
           number: number,
         }),
       })
         .then((response) => response.json())
-        .then((data) =>
+        .then((data) => {
           setUsers(
-            users.filter((item) => item.id != user.id),
-            data
+            [...users.filter((item) => item.id != user?.id), data].sort((a: IUser, b: IUser) => b.id! - a.id!)
           )
-        )
-      setUsers([...users.filter((item) => item.id !== user.id), {id: user.id, name: name, number: number}])
+          // setUsers(users.slice().sort())
+        })
     }
     setName('')
     setNumber('')
-    setUser({})
+    setUser(null)
     setModal({isOpened: false, mode: ''})
   }
 
-  const onDeleteClick = (user) => {
+  const onDeleteClick = (user: IUser) => {
     setUser(user)
     setModal({isOpened: true, mode: 'delete'})
   }
 
   const onDeleteConfirmClick = () => {
-    fetch(`/api/users/${user.id}`, {
+    fetch(`/api/users/${user?.id}`, {
       method: 'delete',
     })
-    setUsers(users.filter((item) => item.id !== user.id))
+    setUsers(users.filter((item) => item.id !== user?.id))
     setModal({isOpened: false, mode: ''})
-    setUser({})
+    setUser(null)
   }
   const onDeleteAllConfirmClick = () => {
     fetch('/api/users', {

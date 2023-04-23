@@ -1,11 +1,32 @@
+import {SetStateAction} from 'react'
 import './usersList.css'
 import {AiOutlinePlusCircle} from 'react-icons/ai'
 import {BsFillTrash3Fill} from 'react-icons/bs'
-import Modal from '../common/Modal'
-import User from './User'
-import Form from './Form'
-import ConfirmModal from './ConfirmModal'
-function UsersList({
+import {Modal} from '../common/Modal'
+import {User} from './User'
+import {Form} from './Form'
+import {ConfirmModal} from './ConfirmModal'
+import {IUser, IModal} from './UsersListContainer'
+
+interface IProps {
+  users: IUser[]
+  user: IUser | null
+  name: string | null
+  number: string | null
+  setName: (name: string) => void
+  setNumber: (number: string) => void
+  modal: IModal
+  setModal: (modal: IModal) => void
+  onEditClick: (user: IUser) => void
+  onDeleteClick: (user: IUser) => void
+  onAddClick: () => void
+  onCancelClick: () => void
+  onSaveClick: () => void
+  onDeleteAllConfirmClick: () => void
+  onDeleteConfirmClick: () => void
+}
+
+export function UsersList({
   users,
   user,
   name,
@@ -21,7 +42,7 @@ function UsersList({
   onSaveClick,
   onDeleteAllConfirmClick,
   onDeleteConfirmClick,
-}) {
+}: IProps) {
   return (
     <>
       <ul className='usersList'>
@@ -44,7 +65,7 @@ function UsersList({
         </div>
       </ul>
       {modal.isOpened && modal.mode === 'post' && (
-        <Modal modalOpened={modal} setModalOpened={setModal}>
+        <Modal modalOpened={modal.isOpened} setModalOpened={setModal}>
           <Form
             modalTitle='Add user'
             submitButtonTitle='Add'
@@ -58,7 +79,7 @@ function UsersList({
         </Modal>
       )}
       {modal.isOpened && modal.mode === 'put' && (
-        <Modal modalOpened={modal} setModalOpened={setModal}>
+        <Modal modalOpened={modal.isOpened} setModalOpened={setModal}>
           <Form
             modalTitle='Edit user'
             submitButtonTitle='Save'
@@ -73,16 +94,16 @@ function UsersList({
       )}
       {modal.isOpened && modal.mode === 'delete' && (
         <ConfirmModal
-          modalOpened={modal}
+          modalOpened={modal.isOpened}
           setModalOpened={setModal}
           modalConfirmClick={onDeleteConfirmClick}
           modalCancelClick={onCancelClick}
-          modalTitle={`Are you sure you want to delete user: ${user.user_name}?`}
+          modalTitle={`Are you sure you want to delete user: ${user!.user_name}?`}
         />
       )}
       {modal.isOpened && modal.mode === 'deleteAll' && (
         <ConfirmModal
-          modalOpened={modal}
+          modalOpened={modal.isOpened}
           setModalOpened={setModal}
           modalConfirmClick={onDeleteAllConfirmClick}
           modalCancelClick={onCancelClick}
@@ -92,5 +113,3 @@ function UsersList({
     </>
   )
 }
-
-export default UsersList

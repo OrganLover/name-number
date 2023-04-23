@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
-const Paginator = ({
-  usersPerPage,
-  totalUsersCount,
-  setCurrentPage,
-  currentNumberOfPortion,
-}) => {
+interface IProps {
+  usersPerPage: number
+  totalUsersCount: number
+  setCurrentPage: (num: number) => void
+  currentNumberOfPortion: number
+}
+
+export function Paginator({usersPerPage, totalUsersCount, setCurrentPage, currentNumberOfPortion}: IProps) {
   let [currentPortion, setCurrentPortion] = useState(1)
   let pagesCount = Math.ceil(totalUsersCount / usersPerPage)
   let pages = []
@@ -23,9 +25,7 @@ const Paginator = ({
   return (
     <ul className='paginationButtonsList'>
       {currentPortion === 1 ? null : (
-        <button onClick={() => setCurrentPortion(currentPortion - 1)}>
-          {'<'}
-        </button>
+        <button onClick={() => setCurrentPortion(currentPortion - 1)}>{'<'}</button>
       )}
       {currentPages.map((num) => {
         return (
@@ -40,12 +40,8 @@ const Paginator = ({
         )
       })}
       {currentPortion === portions[portions.length - 1] ? null : (
-        <button onClick={() => setCurrentPortion(currentPortion + 1)}>
-          {'>'}
-        </button>
+        <button onClick={() => setCurrentPortion(currentPortion + 1)}>{'>'}</button>
       )}
     </ul>
   )
 }
-
-export default Paginator

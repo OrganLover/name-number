@@ -1,7 +1,14 @@
 import {BsFillTrash3Fill} from 'react-icons/bs'
 import {BiEditAlt} from 'react-icons/bi'
+import {IUser} from './UsersListContainer'
 
-function User({user, onEditClick, onDeleteClick}) {
+interface IProps {
+  user: IUser
+  onEditClick: (user: IUser) => void
+  onDeleteClick: (user: IUser) => void
+}
+
+export function User({user, onEditClick, onDeleteClick}: IProps) {
   return (
     <li className='usersListItem'>
       <div className='userInfoBlock'>
@@ -29,5 +36,3 @@ function User({user, onEditClick, onDeleteClick}) {
     </li>
   )
 }
-
-export default User

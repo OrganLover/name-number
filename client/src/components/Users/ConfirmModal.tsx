@@ -1,6 +1,21 @@
-import Modal from '../common/Modal'
+import {Modal} from '../common/Modal'
+import {IModal} from './UsersListContainer'
 
-function ConfirmModal({modalOpened, setModalOpened, modalConfirmClick, modalCancelClick, modalTitle}) {
+interface IProps {
+  modalOpened: boolean
+  setModalOpened: (modal: IModal) => void
+  modalConfirmClick: () => void
+  modalCancelClick: () => void
+  modalTitle: string
+}
+
+export function ConfirmModal({
+  modalOpened,
+  setModalOpened,
+  modalConfirmClick,
+  modalCancelClick,
+  modalTitle,
+}: IProps) {
   return (
     <Modal modalOpened={modalOpened} setModalOpened={setModalOpened}>
       <div>
@@ -17,5 +32,3 @@ function ConfirmModal({modalOpened, setModalOpened, modalConfirmClick, modalCanc
     </Modal>
   )
 }
-
-export default ConfirmModal
