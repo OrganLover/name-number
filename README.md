@@ -4,6 +4,7 @@ name-number - это fullstack приложение наподобие todo list
 Данное приложение было разработано для работадателя в качестве тестового задания.  
 Stack: **PERN(Postgres, Express, React, NodeJS)**  
 Ссылка на демку проекта: [name-num.tatar-developer.ru](https://name-num.tatar-developer.ru)  
+На демке данного проекта TypeScript не стоит. Мой vps сервер не потянул его.  
 Ссылка на портфолио: [tatar-developer.ru](https://tatar-developer.ru)
 
 # Подготовка проекта к локальному запуску

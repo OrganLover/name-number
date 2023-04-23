@@ -79,7 +79,6 @@ function UsersListContainer() {
           setUsers(
             [...users.filter((item) => item.id != user?.id), data].sort((a: IUser, b: IUser) => b.id! - a.id!)
           )
-          // setUsers(users.slice().sort())
         })
     }
     setName('')
